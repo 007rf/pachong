@@ -42,67 +42,71 @@ public class spriderService {
     static Executor executor = Executors.newFixedThreadPool(20);
 
     public static void main(String[] args) throws InterruptedException {
-        //从我的主页开始爬
+        try {
+            //从我的主页开始爬
 //        urlQueue.put("https://www.zhihu.com/people/yao-cheng-46");
-        urlQueue.put("https://www.zhihu.com/people/tang-si");
-        System.out.println("初始队列大小:" + urlQueue.size());
-        System.out.println("开始爬虫.........................................");
-        for (int i = 0; i < 5; i++) {
-            Thread a = new Thread(new Runnable() {
+            urlQueue.put("https://www.zhihu.com/people/tang-si");
+            System.out.println("初始队列大小:" + urlQueue.size());
+            System.out.println("开始爬虫.........................................");
+            for (int i = 0; i < 5; i++) {
+                Thread a = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            String tmp = getAUrl();
+                            if (!filter.contains(tmp)) {
+                                filter.add(tmp);
+                                //System.out.println(Thread.currentThread().getName()+"正在爬取url:"+tmp);
+                                if (tmp != null) {
+                                    crawler(tmp);
+                                }
+                            } else {
+                                System.out.println("此url存在，不爬了." + tmp);
+                            }
+                        }
+                    }
+                });
+                executor.execute(a);
+            }
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (true) {
-                        String tmp = getAUrl();
-                        if (!filter.contains(tmp)) {
-                            filter.add(tmp);
-                            //System.out.println(Thread.currentThread().getName()+"正在爬取url:"+tmp);
-                            if (tmp != null) {
-                                crawler(tmp);
-                            }
-                        } else {
-                            System.out.println("此url存在，不爬了." + tmp);
-                        }
-                    }
-                }
-            });
-            executor.execute(a);
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        //    System.out.println("当前活动线程数："+((ThreadPoolExecutor)executor).getActiveCount());
-                        if (((ThreadPoolExecutor) executor).getActiveCount() < 5) {
-                            Thread a = new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    while (true) {
-                                        String tmp = getAUrl();
-                                        if (!filter.contains(tmp)) {
-                                            filter.add(tmp);
-                                            //System.out.println(Thread.currentThread().getName()+"正在爬取url:"+tmp);
-                                            if (tmp != null) {
-                                                crawler(tmp);
+                        try {
+                            //    System.out.println("当前活动线程数："+((ThreadPoolExecutor)executor).getActiveCount());
+                            if (((ThreadPoolExecutor) executor).getActiveCount() < 5) {
+                                Thread a = new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        while (true) {
+                                            String tmp = getAUrl();
+                                            if (!filter.contains(tmp)) {
+                                                filter.add(tmp);
+                                                //System.out.println(Thread.currentThread().getName()+"正在爬取url:"+tmp);
+                                                if (tmp != null) {
+                                                    crawler(tmp);
+                                                }
+                                            } else {
+                                                System.out.println("此url存在，不爬了." + tmp);
                                             }
-                                        } else {
-                                            System.out.println("此url存在，不爬了." + tmp);
                                         }
                                     }
+                                });
+                                executor.execute(a);
+                                if (urlQueue.size() == 0) {
+                                    System.out.println("队列为0了！！！！！！！！！！1");
                                 }
-                            });
-                            executor.execute(a);
-                            if (urlQueue.size() == 0) {
-                                System.out.println("队列为0了！！！！！！！！！！1");
                             }
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
                 }
-            }
-        }).start();
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static String getAUrl() {
