@@ -45,7 +45,7 @@ public class spriderService {
         try {
             //从我的主页开始爬
 //        urlQueue.put("https://www.zhihu.com/people/yao-cheng-46");
-            urlQueue.put("https://www.zhihu.com/people/tang-si");
+            urlQueue.put("https://www.zhihu.com/people/a-long-13-48");
             System.out.println("初始队列大小:" + urlQueue.size());
             System.out.println("开始爬虫.........................................");
             for (int i = 0; i < 5; i++) {
