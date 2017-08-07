@@ -107,6 +107,9 @@ public class spriderService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        while (true) {
+            Thread.sleep(10000);
+        }
     }
 
     public static String getAUrl() {
