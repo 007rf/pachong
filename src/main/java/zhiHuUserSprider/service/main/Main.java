@@ -12,7 +12,7 @@ public class Main {
 
 		while(true){
 			// 设置代理ip
-			HttpUtils.setProxyIp();
+//			HttpUtils.setProxyIp();
 			Document document = JsoupUtils.getDocument(url);// 得到的document一定是正常 的document
 			System.out.println(document);
 		}

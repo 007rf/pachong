@@ -25,6 +25,46 @@ public class ZhiHuUserBean {
 
 	String answersNum;// 回答数量
 
+	public String getEssayNum() {
+		return essayNum;
+	}
+
+	public void setEssayNum(String essayNum) {
+		this.essayNum = essayNum;
+	}
+
+	public String getCollumnNum() {
+		return collumnNum;
+	}
+
+	public void setCollumnNum(String collumnNum) {
+		this.collumnNum = collumnNum;
+	}
+
+	public String getShareNum() {
+		return shareNum;
+	}
+
+	public void setShareNum(String shareNum) {
+		this.shareNum = shareNum;
+	}
+
+	String essayNum;// 文章数量
+
+	String collumnNum;// 专栏数量
+
+	String shareNum;// 分享数量
+
+	public String getAskNum() {
+		return askNum;
+	}
+
+	public void setAskNum(String askNum) {
+		this.askNum = askNum;
+	}
+
+	String askNum;// 提问数量
+
 	String starsNum;// 被赞同数
 
 	String thxNum;// 被感谢数
@@ -32,6 +72,18 @@ public class ZhiHuUserBean {
 	String followingNum;//关注的人
 
 	String followersNum;//关注者数量
+
+	String havePublicAccount; //是否有公众号
+
+	public String getHavePublicAccount() {
+		return havePublicAccount;
+	}
+
+	public void setHavePublicAccount(String havePublicAccount) {
+		this.havePublicAccount = havePublicAccount;
+	}
+
+
 
 
 	@Override
