@@ -45,7 +45,7 @@ public class spriderService {
         try {
             //从我的主页开始爬
 //        urlQueue.put("https://www.zhihu.com/people/yao-cheng-46");
-            urlQueue.put("https://www.zhihu.com/people/xu-jian-57-24");
+            urlQueue.put("https://www.zhihu.com/people/zhu-zhu-41-52-67");
             System.out.println("初始队列大小:" + urlQueue.size());
             System.out.println("开始爬虫.........................................");
             for (int i = 0; i < 5; i++) {
@@ -198,18 +198,47 @@ public class spriderService {
         // 回答数量
 //                    String answersNum = userUrlContent.select(".ProfileMain-header").first().select("li").get(1).text().substring(2);
         System.out.println(userContent);
-        user.setAnswersNum(userContent.substring(userContent.indexOf("回答") + 2, userContent.indexOf("提问") - 1));
-        user.setAskNum(userContent.substring(userContent.indexOf("提问") + 2, userContent.indexOf("文章") - 1));
-        user.setCollumnNum(userContent.substring(userContent.indexOf("专栏") + 2, userContent.indexOf("分享") - 1));
-        user.setShareNum(userContent.substring(userContent.indexOf("分享") + 2, userContent.indexOf("更多") - 1));
+        try {
+            user.setAnswersNum(userContent.substring(userContent.indexOf("回答") + 2, userContent.indexOf("提问") - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            user.setAskNum(userContent.substring(userContent.indexOf("提问") + 2, userContent.indexOf("文章") - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            user.setCollumnNum(userContent.substring(userContent.indexOf("专栏") + 2, userContent.indexOf("分享") - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            user.setShareNum(userContent.substring(userContent.indexOf("分享") + 2, userContent.indexOf("更多") - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // 被赞同数
 //                    Elements e1 = userUrlContent.select(".IconGraf");
 //                    String starsNumString = e1.get(e1.size() - 2).text();
 //                    String starsNum = starsNumString.substring(starsNumString.indexOf("得") + 2, starsNumString.indexOf("次") - 1);
 
-        user.setStarsNum(userContent.substring(userContent.indexOf("获得") + 3, userContent.indexOf("次赞同") - 1));
-        user.setThxNum(userContent.substring(userContent.lastIndexOf("获得") + 3, userContent.indexOf("次感谢") - 1));
+        try {
+            user.setStarsNum(userContent.substring(userContent.indexOf("获得") + 3, userContent.indexOf("次赞同") - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            user.setThxNum(userContent.substring(userContent.lastIndexOf("获得") + 3, userContent.indexOf("次感谢") - 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         // 被感谢数
 //                    Elements e2 = userUrlContent.select(".Profile-sideColumnItemValue");
