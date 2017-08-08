@@ -139,8 +139,13 @@ public class spriderService {
 //                System.out.println(userContent.substring(userContent.lastIndexOf("获得")+3,userContent.indexOf("次感谢")-1));
 
         //姓名
-        String name = userUrlContent.select(".ProfileHeader-name").first().text();
-        user.setName(name);
+        try {
+            String name = userUrlContent.select(".ProfileHeader-name").first().text();
+            user.setName(name);
+
+        } catch (Exception e) {
+
+        }
 
         String sign = userUrlContent.select(".ProfileHeader-headline").first().text();
         if (!StringUtils.isEmpty(sign) && sign.contains("公众号")) {
